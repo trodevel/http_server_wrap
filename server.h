@@ -19,15 +19,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 9788 $ $Date:: 2018-10-05 #$ $Author: serge $
+// $Revision: 9794 $ $Date:: 2018-10-08 #$ $Author: serge $
 
 #ifndef HTTP_SERVER_WRAP__SERVER_H
 #define HTTP_SERVER_WRAP__SERVER_H
 
-#include <memory>               // std::shared_ptr
-
-#include "client_https.hpp"                 // Simple-Web-Server
-#include "server_https.hpp"                 // Simple-Web-Server
+#include <thread>                           // std::thread
 
 #include "config.h"                         // Config
 
@@ -39,12 +36,12 @@ namespace http_server_wrap {
 class Server: public restful_interface::IHandler, public virtual threcon::IControllable
 {
 public:
-    typedef SimpleWeb::Server<SimpleWeb::HTTPS> HttpsServer;
-    typedef SimpleWeb::Client<SimpleWeb::HTTPS> HttpsClient;
+    struct HttpsServerWrap;
 
 public:
 
     Server();
+    ~Server();
 
     bool init(
             const Config                & cfg,
@@ -62,14 +59,16 @@ public:
 private:
 
     void thread_func();
+    void init_handlers();
 
 private:
-    std::shared_ptr<HttpsServer>    server_;
 
-    uint32_t                        log_id_;
-    IHandler                        * handler_;
+    uint32_t            log_id_;
+    IHandler            * handler_;
 
-    std::thread                     worker_;
+    HttpsServerWrap     * server_;  // need to use raw-pointer instead of std::unique_ptr because the latter one needs to know the definition of the object, 18a08
+
+    std::thread         worker_;
 };
 
 } // namespace http_server_wrap

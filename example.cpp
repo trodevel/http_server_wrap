@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 9790 $ $Date:: 2018-10-05 #$ $Author: serge $
+// $Revision: 9793 $ $Date:: 2018-10-08 #$ $Author: serge $
 
 #include <thread>                   // std::thread
 #include <functional>               // std::bind
@@ -31,14 +31,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "server.h"                         // Server
 #include "restful_interface/i_handler.h"    // IHandler
+#include "restful_interface/str_helper.h"   // StrHelper
 
 class Handler: public virtual restful_interface::IHandler
 {
     const std::string handle( restful_interface::method_type_e type, const std::string & path, const std::string & body, const std::string & origin )
     {
-        std::cout << "got request '" << body << "'" << std::endl;
-
-        return "got '" + body + "'";
+        return "request: type " + restful_interface::StrHelper::to_string( type ) + ", path '" + path + "', body '" + body + "', origin " + origin;
     }
 };
 

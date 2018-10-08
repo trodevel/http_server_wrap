@@ -1,0 +1,1 @@
+curl -k -i -H "Accept: application/json" -H "Content-Type: application/json" -d "param1=value1" -X GET https://localhost:1234/api/xxx
