@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 9793 $ $Date:: 2018-10-08 #$ $Author: serge $
+// $Revision: 9802 $ $Date:: 2018-10-09 #$ $Author: serge $
 
 #include <thread>                   // std::thread
 #include <functional>               // std::bind
@@ -73,7 +73,7 @@ int main()
 
     try
     {
-        http_server_wrap::Config cfg = { "server.crt", "server.key", 1234, 5, 2 };
+        http_server_wrap::Config cfg = { "server.crt", "server.key", 8080, 5, 2 };
 
         http_server_wrap::Server s;
 
