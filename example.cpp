@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 9802 $ $Date:: 2018-10-09 #$ $Author: serge $
+// $Revision: 12038 $ $Date:: 2019-09-25 #$ $Author: serge $
 
 #include <thread>                   // std::thread
 #include <functional>               // std::bind
@@ -81,7 +81,7 @@ int main()
 
         auto log_id   = dummy_logger::register_module( "http_server_wrap::Server" );
 
-        dummy_logger::set_log_level( log_levels_log4j::DEBUG );
+        dummy_logger::set_log_level( log_levels_log4j::Debug );
 
         s.init( cfg, log_id, & h );
 
