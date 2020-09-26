@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 13841 $ $Date:: 2020-09-25 #$ $Author: serge $
+// $Revision: 13857 $ $Date:: 2020-09-26 #$ $Author: serge $
 
 #include "config_reader/config_reader.h"    // config_reader::ConfigReader
 #include "config.h"                         // Config

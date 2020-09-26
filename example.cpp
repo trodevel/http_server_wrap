@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 12038 $ $Date:: 2019-09-25 #$ $Author: serge $
+// $Revision: 13857 $ $Date:: 2020-09-26 #$ $Author: serge $
 
 #include <thread>                   // std::thread
 #include <functional>               // std::bind
@@ -30,8 +30,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "utils/set_this_thread_name.h"     // set_this_thread_name()
 
 #include "server.h"                         // Server
+#include "init_config.h"                    // init_config
 #include "restful_interface/i_handler.h"    // IHandler
 #include "restful_interface/str_helper.h"   // StrHelper
+#include "config_reader/config_reader.h"    // config_reader::ConfigReader
 
 class Handler: public virtual restful_interface::IHandler
 {
@@ -73,7 +75,15 @@ int main()
 
     try
     {
-        http_server_wrap::Config cfg = { "server.crt", "server.key", 8080, 5, 2 };
+        std::string config_file( "config_dummy.ini" );
+
+        config_reader::ConfigReader cr;
+
+        cr.init( config_file );
+
+        http_server_wrap::Config cfg;
+
+        http_server_wrap::init_config( & cfg, "http_server", cr );
 
         http_server_wrap::Server s;
 
